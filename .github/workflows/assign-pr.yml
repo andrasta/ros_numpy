@@ -1,0 +1,15 @@
+name: Auto Assign Reviewers Based on Target Branch
+
+# Thin wrapper — the actual logic lives in andrasta/shared-workflows.
+# This is the only file that needs to exist in each individual repo/branch.
+# `secrets: inherit` passes this repo's/org's secrets (including ORG_PAT)
+# through to the called workflow.
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  assign-pr:
+    uses: andrasta/shared-workflows/.github/workflows/assign-pr.yml@main
+    secrets: inherit
